@@ -74,21 +74,27 @@
     }
 
     function generateFullscreenButtonCode(gameLink, fullscreenButtonCodeTextbox) {
-      var code = `<center>
-  <button onclick="openGame()">Play in Fullscreen</button>
-  <script>
-    function openGame() {
-      var win = window.open();
-      var url = "${gameLink}";
-      var iframe = win.document.createElement('iframe');
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
-      iframe.src = url;
-      win.document.body.appendChild(iframe);
-    }
-  </script>
-</center>`;
+      var scriptText = `
+        var code = '<center>';
+        code += '<button onclick="openGame()">Play in Fullscreen</button>';
+        code += '<script>';
+        code += 'function openGame() {';
+        code += 'var win = window.open();';
+        code += 'var url = "${gameLink}";';
+        code += 'var iframe = win.document.createElement("iframe");';
+        code += 'iframe.style.width = "100%";';
+        code += 'iframe.style.height = "100%";';
+        code += 'iframe.style.border = "none";';
+        code += 'iframe.src = url;';
+        code += 'win.document.body.appendChild(iframe);';
+        code += '}';
+        code += '</script>';
+        code += '</center>';
+      `;
+      var scriptElement = document.createElement('script');
+      scriptElement.text = scriptText;
+      document.body.appendChild(scriptElement);
+
       fullscreenButtonCodeTextbox.value = code;
     }
 
